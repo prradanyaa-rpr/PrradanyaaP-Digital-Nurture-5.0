@@ -1,0 +1,358 @@
+/* ===========================
+   CSS Reset
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ===========================
+   Body
+=========================== */
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+/* ===========================
+   Header
+=========================== */
+
+header{
+    background:#1f4e79;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+}
+
+header h2{
+    font-size:clamp(1.5rem,3vw,2.5rem);
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ffd966;
+}
+
+/* ===========================
+   Hero
+=========================== */
+
+#hero{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    min-height:40vh;
+
+    background:white;
+
+    padding:50px 20px;
+}
+
+#hero h1{
+    font-size:2.7rem;
+    margin-bottom:20px;
+}
+
+#hero p{
+    font-size:1.1rem;
+    max-width:700px;
+    margin-bottom:30px;
+}
+
+#hero button{
+    padding:14px 28px;
+    border:none;
+    background:#1f4e79;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#hero button:hover{
+    background:#163958;
+}
+
+/* ===========================
+   Stats
+=========================== */
+
+#stats{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding:30px 20px;
+    background:#dde7f2;
+}
+
+.stat-item{
+    flex:1;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.stat-item h3{
+    margin-bottom:10px;
+    color:#1f4e79;
+}
+
+.stat-item p{
+    font-size:1.4rem;
+    font-weight:bold;
+}
+
+/* ===========================
+   Controls
+=========================== */
+
+#controls{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    padding:30px 20px;
+}
+
+#searchBox{
+
+    padding:12px;
+
+    font-size:16px;
+
+    border:1px solid #ccc;
+
+    border-radius:6px;
+}
+
+#sortBtn{
+
+    padding:12px;
+
+    border:none;
+
+    background:#1f4e79;
+
+    color:white;
+
+    border-radius:6px;
+
+    cursor:pointer;
+}
+
+#sortBtn:hover{
+
+    background:#163958;
+}
+
+/* ===========================
+   Courses
+=========================== */
+
+#courses{
+    padding:40px 20px;
+}
+
+#courses h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.course-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:25px;
+}
+
+.course-card{
+
+    background:white;
+
+    padding:25px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+
+    min-height:220px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.course-card:hover{
+
+    transform:translateY(-5px);
+}
+
+.course-card h3{
+
+    margin-bottom:15px;
+
+    color:#1f4e79;
+}
+
+.course-card p{
+
+    margin-bottom:18px;
+}
+
+.course-card span{
+
+    font-weight:bold;
+}
+
+/* ===========================
+   Selected Course
+=========================== */
+
+#selectedCourse{
+
+    padding:30px 20px;
+}
+
+#selectedCourse h2{
+
+    margin-bottom:15px;
+}
+
+#selectedText{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+/* ===========================
+   Credits
+=========================== */
+
+#credits{
+
+    padding:30px 20px;
+}
+
+#credits h2{
+
+    margin-bottom:15px;
+}
+
+#totalCredits{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#1f4e79;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+footer{
+
+    background:#1f4e79;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    margin-top:30px;
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(min-width:768px){
+
+    header{
+
+        flex-direction:row;
+
+        justify-content:space-between;
+    }
+
+    nav ul{
+
+        flex-direction:row;
+    }
+
+    #stats{
+
+        flex-direction:row;
+    }
+
+    #controls{
+
+        flex-direction:row;
+    }
+
+    #searchBox{
+
+        flex:1;
+    }
+
+    .course-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ===========================
+   Desktop
+=========================== */
+
+@media(min-width:1024px){
+
+    #hero{
+
+        padding:90px 20px;
+    }
+
+    .course-grid{
+
+        grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+
+}
