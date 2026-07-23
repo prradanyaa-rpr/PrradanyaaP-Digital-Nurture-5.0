@@ -1,0 +1,157 @@
+/* ---------- CSS Reset ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* ---------- Body ---------- */
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+    color:#333;
+    line-height:1.6;
+}
+
+/* ---------- Header ---------- */
+
+header{
+    background:#1f4e79;
+    color:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 50px;
+}
+
+header h2{
+    font-size:30px;
+}
+
+/* ---------- Navigation ---------- */
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ffd966;
+}
+
+/* ---------- Hero ---------- */
+
+#hero{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    background:white;
+}
+
+#hero h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+#hero p{
+    font-size:18px;
+    margin-bottom:30px;
+}
+
+#hero button{
+
+    padding:12px 25px;
+
+    border:2px solid #1f4e79;
+
+    background:#1f4e79;
+
+    color:white;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+#hero button:hover{
+
+    background:white;
+
+    color:#1f4e79;
+}
+
+/* ---------- Courses ---------- */
+
+#courses{
+
+    padding:50px;
+}
+
+#courses h2{
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.course-card{
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.course-card h3{
+
+    margin-bottom:10px;
+}
+
+.course-card p{
+
+    margin-bottom:15px;
+}
+
+.course-card span{
+
+    font-weight:bold;
+
+    color:#1f4e79;
+}
+
+/* ---------- Footer ---------- */
+
+footer{
+
+    background:#1f4e79;
+
+    color:white;
+
+    text-align:center;
+
+    padding:20px;
+
+    margin-top:30px;
+}
