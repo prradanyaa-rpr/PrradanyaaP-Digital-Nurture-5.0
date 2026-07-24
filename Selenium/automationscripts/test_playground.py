@@ -1,104 +1,69 @@
-
 """
-Hands-On 4
-Selenium WebDriver Setup
-
-Selenium Components
-
-1. WebDriver
-- WebDriver is the main Selenium component.
-- It communicates directly with the browser using browser drivers.
-- It performs browser actions like clicking buttons, entering text, and navigation.
-
-2. Selenium Grid
-- Selenium Grid allows tests to run on multiple browsers and multiple machines simultaneously.
-- It is mainly used for parallel execution.
-
-3. Selenium IDE
-- Selenium IDE is a browser extension.
-- It records and plays back browser actions.
-- It can generate Selenium code automatically.
+test_playground.py
+Updated sample pytest suite for Hands-on 6.
 """
 
-from selenium import webdriver
+import pytest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-import time
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support import expected_conditions as EC
 
-# Chrome Options
-options = webdriver.ChromeOptions()
 
-# Headless mode
-options.add_argument("--headless")
+@pytest.mark.parametrize("message", ["Hello", "Selenium Automation", "12345"])
+def test_simple_form_submission(driver, base_url, message):
+    driver.get(base_url + "simple-form-demo/")
+    wait = WebDriverWait(driver, 10)
 
-driver = webdriver.Chrome(
-    service=Service(ChromeDriverManager().install()),
-    options=options
-)
+    inputs = wait.until(
+        EC.presence_of_all_elements_located((By.CSS_SELECTOR, "input[type='text']"))
+    )
 
-# Implicit Wait
-driver.implicitly_wait(10)
+    target = next((e for e in inputs if e.is_displayed() and e.is_enabled()), None)
+    assert target is not None
 
-# Implicit wait waits for every element globally.
-# Explicit waits are preferred because they wait only when required,
-# making scripts faster and more reliable.
+    target.clear()
+    target.send_keys(message)
+    assert target.get_attribute("value") == message
 
-# Open Website
-driver.get("https://www.lambdatest.com/selenium-playground/")
 
-# Print Title
-print("Website Title:")
-print(driver.title)
+def test_checkbox_demo(driver, base_url):
+    driver.get(base_url + "checkbox-demo/")
+    wait = WebDriverWait(driver, 10)
 
-# -----------------------------
-# Task 2
-# -----------------------------
+    checkbox = wait.until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "input[type='checkbox']"))
+    )
 
-# Click Simple Form Demo
-driver.find_element(By.LINK_TEXT, "Simple Form Demo").click()
+    checkbox.click()
+    assert checkbox.is_selected()
 
-# Verify URL
-assert "simple-form-demo" in driver.current_url
+    checkbox.click()
+    assert not checkbox.is_selected()
 
-print("URL Verified")
 
-# Navigate Back
-driver.back()
+def test_dropdown_selection(driver, base_url):
+    driver.get(base_url + "select-dropdown-demo/")
+    wait = WebDriverWait(driver, 10)
 
-time.sleep(2)
+    dropdown = wait.until(
+        EC.presence_of_element_located((By.TAG_NAME, "select"))
+    )
 
-# Open Google in New Tab
-driver.execute_script("window.open('https://www.google.com');")
+    select = Select(dropdown)
 
-# Print Window Handles
-print("Window Handles:")
-print(driver.window_handles)
+    select.select_by_visible_text("Wednesday")
 
-# Switch to Google
-driver.switch_to.window(driver.window_handles[1])
+    # Re-locate the dropdown because the page refreshes the DOM
+    dropdown = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.TAG_NAME, "select"))
+    )
 
-print("Google Title:")
-print(driver.title)
+    select = Select(dropdown)
 
-# Switch Back
-driver.switch_to.window(driver.window_handles[0])
+    selected = driver.execute_script("""
+    return arguments[0].options[
+    arguments[0].selectedIndex
+    ].text;
+    """, dropdown)
 
-# Screenshot
-driver.save_screenshot("playground_screenshot.png")
-
-print("Screenshot Saved")
-
-# Window Size
-print("Current Window Size:")
-print(driver.get_window_size())
-
-driver.set_window_size(1280, 800)
-
-print("Updated Window Size:")
-print(driver.get_window_size())
-
-# Consistent window size ensures responsive UI behaves
-# the same during every automation execution.
-
-driver.quit()
+    assert selected == "Wednesday"
